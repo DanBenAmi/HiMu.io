@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiMu: Hierarchical Multimodal Frame Selection for Long Video Question Answering</title>
+    <meta name="description" content="HiMu is a training-free framework that decomposes queries into hierarchical logic trees and routes them to lightweight multimodal experts for efficient long video question answering.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="HiMu: Hierarchical Multimodal Frame Selection for Long Video QA">
+    <meta property="og:description" content="Training-free hierarchical multimodal frame selection achieving state-of-the-art on Video-MME with only 16 frames.">
+    <meta property="og:image" content="assets/teaser_plot3.png">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Preload hero image -->
+    <link rel="preload" as="image" href="assets/teaser_plot3.png">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="#" class="nav-logo">HiMu</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#abstract">Abstract</a></li>
+            <li><a href="#method">Method</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#interpretability">Interpretability</a></li>
+            <li><a href="#citation">Citation</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero" id="hero">
+    <div class="hero-content">
+        <div class="venue-badge">ECCV 2026</div>
+        <h1 class="hero-title">Hi<span class="accent-text">Mu</span></h1>
+        <p class="hero-subtitle">Hierarchical Multimodal Frame Selection<br>for Long Video Question Answering</p>
+
+        <div class="authors">
+            <span class="author">Dan Ben-Ami<sup>1</sup></span>
+            <span class="author">Gabriele Serussi<sup>1</sup></span>
+            <span class="author">Kobi Cohen<sup>2</sup></span>
+            <span class="author">Chaim Baskin<sup>1</sup></span>
+        </div>
+        <div class="affiliations">
+            <span><sup>1</sup>INSIGHT Lab, Ben-Gurion University of the Negev, Israel</span>
+            <span><sup>2</sup>Ben-Gurion University of the Negev, Israel</span>
+        </div>
+
+        <div class="hero-buttons">
+            <a href="#" class="btn btn-primary btn-disabled" title="Coming Soon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Paper (Coming Soon)
+            </a>
+            <a href="#" class="btn btn-secondary btn-disabled" title="Coming Soon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                Code (Coming Soon)
+            </a>
+            <a href="#citation" class="btn btn-accent">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                BibTeX
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-teaser">
+        <figure class="teaser-card">
+            <img src="assets/teaser_plot3.png" alt="HiMu bridges the gap between shallow similarity methods and expensive agent-based approaches using a hierarchical neuro-symbolic framework." width="900">
+            <figcaption>HiMu bridges the gap between fast but shallow similarity methods and accurate but expensive agent-based approaches through hierarchical neuro-symbolic composition of multimodal experts.</figcaption>
+        </figure>
+    </div>
+</header>
+
+<!-- Key Results Banner -->
+<section class="stats-banner">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card reveal">
+                <div class="stat-number">73.22%</div>
+                <div class="stat-label">Video-MME Accuracy</div>
+                <div class="stat-detail">Qwen3-VL-8B, 16 frames</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-number">~10&times;</div>
+                <div class="stat-label">Fewer FLOPs</div>
+                <div class="stat-detail">vs. agentic methods</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-number">Training-Free</div>
+                <div class="stat-label">No Finetuning</div>
+                <div class="stat-detail">Plug-and-play with any LVLM</div>
+            </div>
+            <div class="stat-card reveal">
+                <div class="stat-number">16 frames</div>
+                <div class="stat-label">Beats 32&ndash;512 Frames</div>
+                <div class="stat-detail">of competing methods</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Abstract -->
+<section class="section section--light" id="abstract">
+    <div class="container container--narrow">
+        <h2 class="section-title reveal">Abstract</h2>
+        <div class="abstract-text reveal">
+            <p>Long-form video question answering requires reasoning over extended temporal contexts, making frame selection critical for large vision-language models (LVLMs) bound by finite context windows. Existing methods face a sharp trade-off: similarity-based selectors are fast but collapse compositional queries into a single dense vector, losing sub-event ordering and cross-modal bindings; agent-based methods recover this structure through iterative LVLM inference, but at prohibitive cost.</p>
+            <p>We introduce <strong>HiMu</strong>, a training-free framework that bridges this gap. A single text-only LLM call decomposes the query into a <em>hierarchical logic tree</em> whose leaves are atomic predicates, each routed to a lightweight expert spanning vision (CLIP, open-vocabulary detection, OCR) and audio (ASR, CLAP). The resulting signals are normalized, temporally smoothed to align different modalities, and composed bottom-up through fuzzy-logic operators that enforce temporal sequencing and adjacency, producing a continuous <em>satisfaction curve</em>.</p>
+            <p>Evaluations on Video-MME, LongVideoBench and HERBench-Lite show that HiMu advances the efficiency&ndash;accuracy Pareto front: at 16 frames with Qwen3-VL 8B it outperforms all competing selectors, and with GPT-4o it surpasses agentic systems operating at 32&ndash;512 frames while requiring roughly <strong>10&times; fewer FLOPs</strong>.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Method -->
+<section class="section section--dark" id="method">
+    <div class="container">
+        <h2 class="section-title reveal">Method</h2>
+        <p class="section-intro reveal">HiMu operates in four stages: it decomposes the query into a hierarchical logic tree, grounds each atomic predicate with a specialized expert, composes signals bottom-up through fuzzy-logic operators, and selects the most informative frames via Peak-And-Spread Selection.</p>
+
+        <figure class="pipeline-figure reveal">
+            <img src="assets/himu_pipe3_with_vid_streams2.png" alt="HiMu pipeline: Query Decomposition → Expert Grounding → Fuzzy Logic Composition → PASS Frame Selection" loading="lazy">
+        </figure>
+
+        <div class="steps-grid">
+            <div class="step-card reveal">
+                <div class="step-icon step-icon--purple">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <div class="step-number">01</div>
+                <h3>Query Decomposition</h3>
+                <p>A single LLM call parses the question into a hierarchical logic tree of atomic predicates connected by AND, OR, SEQ, and RIGHT_AFTER operators.</p>
+            </div>
+            <div class="step-card reveal">
+                <div class="step-icon step-icon--red">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                </div>
+                <div class="step-number">02</div>
+                <h3>Expert Grounding</h3>
+                <p>Each predicate is routed to a specialized lightweight expert: CLIP for appearance, YOLO-World for objects, OCR for text, ASR for speech, CLAP for audio.</p>
+            </div>
+            <div class="step-card reveal">
+                <div class="step-icon step-icon--amber">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <div class="step-number">03</div>
+                <h3>Fuzzy Logic Composition</h3>
+                <p>Expert signals are normalized, temporally smoothed with bandwidth-matched filters, and composed bottom-up via fuzzy-logic operators into a satisfaction curve.</p>
+            </div>
+            <div class="step-card reveal">
+                <div class="step-icon step-icon--teal">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                </div>
+                <div class="step-number">04</div>
+                <h3>PASS Selection</h3>
+                <p>Peak-And-Spread Selection identifies the top-K most relevant frames, balancing peak satisfaction with temporal diversity across the video.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Logic Trees -->
+<section class="section section--light" id="trees">
+    <div class="container">
+        <h2 class="section-title reveal">Hierarchical Logic Trees</h2>
+        <p class="section-intro reveal">HiMu decomposes complex, compositional video questions into structured logic trees. Each leaf is an atomic predicate grounded by a specialized expert, while internal nodes enforce temporal and logical relationships.</p>
+        <figure class="figure-card reveal">
+            <img src="assets/trees_examples2.png" alt="Examples of hierarchical logic trees generated from Video-MME questions" loading="lazy">
+            <figcaption>Logic trees generated from Video-MME questions. Leaves are routed to modality-specific experts (CLIP, OVD, OCR, ASR, CLAP), and composed via AND, OR, SEQ operators.</figcaption>
+        </figure>
+    </div>
+</section>
+
+<!-- Results -->
+<section class="section section--alt" id="results">
+    <div class="container">
+        <h2 class="section-title reveal">Results</h2>
+
+        <!-- Efficiency Plot -->
+        <div class="results-efficiency reveal">
+            <figure class="figure-card">
+                <img src="assets/flops_vs_accuracy.png" alt="HiMu advances the Pareto front of accuracy vs compute on Video-MME" loading="lazy">
+                <figcaption>HiMu advances the efficiency&ndash;accuracy Pareto front on Video-MME. It achieves higher accuracy than similarity-based methods while using ~10&times; fewer FLOPs than agentic approaches.</figcaption>
+            </figure>
+        </div>
+
+        <!-- Results Table -->
+        <div class="results-table-section reveal">
+            <div class="table-tabs">
+                <button class="tab-btn active" data-tab="controlled">Controlled Comparison</button>
+                <button class="tab-btn" data-tab="generalization">Cross-LVLM Generalization</button>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Model</th>
+                            <th>Short</th>
+                            <th>Med.</th>
+                            <th>Long</th>
+                            <th>Overall</th>
+                            <th>LVB<sub>val</sub></th>
+                            <th>HERBench-Lite</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group" data-group="controlled">
+                        <tr>
+                            <td>Uniform Sampling</td>
+                            <td>Qwen3-VL-8B</td>
+                            <td>76.34</td>
+                            <td>66.31</td>
+                            <td>55.58</td>
+                            <td>66.36</td>
+                            <td>55.74</td>
+                            <td>41.70</td>
+                        </tr>
+                        <tr>
+                            <td>BOLT</td>
+                            <td>Qwen3-VL-8B</td>
+                            <td>69.58</td>
+                            <td>67.87</td>
+                            <td>68.73</td>
+                            <td>68.74</td>
+                            <td>54.55</td>
+                            <td>42.20</td>
+                        </tr>
+                        <tr>
+                            <td>T*</td>
+                            <td>Qwen3-VL-8B</td>
+                            <td>73.66</td>
+                            <td>67.39</td>
+                            <td>68.12</td>
+                            <td>69.77</td>
+                            <td>57.49</td>
+                            <td>39.10</td>
+                        </tr>
+                        <tr>
+                            <td>AKS</td>
+                            <td>Qwen3-VL-8B</td>
+                            <td>70.05</td>
+                            <td>65.10</td>
+                            <td>68.73</td>
+                            <td>67.98</td>
+                            <td>57.14</td>
+                            <td>40.25</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>HiMu (Ours)</strong></td>
+                            <td>Qwen3-VL-8B</td>
+                            <td><strong>78.55</strong></td>
+                            <td><strong>71.00</strong></td>
+                            <td><strong>69.90</strong></td>
+                            <td><strong>73.22</strong></td>
+                            <td><strong>64.19</strong></td>
+                            <td><strong>43.22</strong></td>
+                        </tr>
+                    </tbody>
+                    <tbody class="table-group" data-group="generalization" style="display: none;">
+                        <tr>
+                            <td>Uniform</td>
+                            <td>LLaVA-OV-1.5-8B</td>
+                            <td>72.26</td>
+                            <td>62.33</td>
+                            <td>54.85</td>
+                            <td>63.55</td>
+                            <td>54.33</td>
+                            <td>35.75</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>HiMu (Ours)</strong></td>
+                            <td>LLaVA-OV-1.5-8B</td>
+                            <td>71.87</td>
+                            <td><strong>66.99</strong></td>
+                            <td><strong>63.94</strong></td>
+                            <td><strong>67.65</strong></td>
+                            <td><strong>57.85</strong></td>
+                            <td><strong>35.87</strong></td>
+                        </tr>
+                        <tr class="table-divider"><td colspan="8"></td></tr>
+                        <tr>
+                            <td>Uniform</td>
+                            <td>InternVL-3.5-8B</td>
+                            <td>75.41</td>
+                            <td>67.39</td>
+                            <td>56.55</td>
+                            <td>66.63</td>
+                            <td>59.23</td>
+                            <td>38.30</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>HiMu (Ours)</strong></td>
+                            <td>InternVL-3.5-8B</td>
+                            <td><strong>76.92</strong></td>
+                            <td><strong>70.40</strong></td>
+                            <td><strong>66.50</strong></td>
+                            <td><strong>71.35</strong></td>
+                            <td><strong>64.11</strong></td>
+                            <td><strong>38.32</strong></td>
+                        </tr>
+                        <tr class="table-divider"><td colspan="8"></td></tr>
+                        <tr>
+                            <td>Uniform</td>
+                            <td>Qwen2.5-VL-7B</td>
+                            <td>72.49</td>
+                            <td>61.01</td>
+                            <td>53.82</td>
+                            <td>62.57</td>
+                            <td>54.58</td>
+                            <td>34.05</td>
+                        </tr>
+                        <tr class="gray-row">
+                            <td>VideoZoomer (128f)</td>
+                            <td>Qwen2.5-VL-7B</td>
+                            <td>&ndash;</td>
+                            <td>&ndash;</td>
+                            <td>55.8</td>
+                            <td>65.2</td>
+                            <td>57.7</td>
+                            <td>&ndash;</td>
+                        </tr>
+                        <tr class="gray-row">
+                            <td>VideoChat-A1 (512f)</td>
+                            <td>Qwen2.5-VL-7B</td>
+                            <td>&ndash;</td>
+                            <td>&ndash;</td>
+                            <td>&ndash;</td>
+                            <td>69.7</td>
+                            <td>55.6</td>
+                            <td>&ndash;</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>HiMu (Ours)</strong></td>
+                            <td>Qwen2.5-VL-7B</td>
+                            <td><strong>73.08</strong></td>
+                            <td><strong>65.10</strong></td>
+                            <td><strong>62.86</strong></td>
+                            <td><strong>67.09</strong></td>
+                            <td><strong>57.51</strong></td>
+                            <td><strong>35.17</strong></td>
+                        </tr>
+                        <tr class="table-divider"><td colspan="8"></td></tr>
+                        <tr>
+                            <td>Uniform</td>
+                            <td>GPT-4o</td>
+                            <td>76.96</td>
+                            <td>73.03</td>
+                            <td>71.43</td>
+                            <td>73.81</td>
+                            <td>55.58</td>
+                            <td>37.47</td>
+                        </tr>
+                        <tr class="gray-row">
+                            <td>VSLS (32f)</td>
+                            <td>GPT-4o</td>
+                            <td>71.9</td>
+                            <td>61.9</td>
+                            <td>55.2</td>
+                            <td>63.0</td>
+                            <td>63.4</td>
+                            <td>&ndash;</td>
+                        </tr>
+                        <tr class="gray-row">
+                            <td>VideoChat-A1 (384f)</td>
+                            <td>&ndash;</td>
+                            <td>&ndash;</td>
+                            <td>&ndash;</td>
+                            <td>&ndash;</td>
+                            <td>77.2</td>
+                            <td>66.7</td>
+                            <td>&ndash;</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>HiMu (Ours)</strong></td>
+                            <td>GPT-4o</td>
+                            <td><strong>80.88</strong></td>
+                            <td><strong>77.19</strong></td>
+                            <td><strong>76.53</strong></td>
+                            <td><strong>78.18</strong></td>
+                            <td><strong>65.10</strong></td>
+                            <td><strong>40.68</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="table-caption">Comparison on Video-MME, LongVideoBench<sub>val</sub>, and HERBench-Lite. All methods use K=16 frames unless noted. <span class="gray-text">Gray entries</span> denote results reported by respective authors under different frame budgets.</p>
+        </div>
+
+        <!-- Key Takeaway -->
+        <div class="results-highlight reveal">
+            <div class="highlight-card">
+                <p>HiMu with GPT-4o at <strong>16 frames</strong> achieves <strong>78.18%</strong> on Video-MME, surpassing VideoChat-A1 at 384 frames (77.2%) and VSLS at 32 frames (63.0%) &mdash; demonstrating that precisely localized, compositionally verified frames are more effective than expanding the context window with hundreds of densely sampled frames.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Interpretability -->
+<section class="section section--light" id="interpretability">
+    <div class="container">
+        <h2 class="section-title reveal">Interpretability</h2>
+        <p class="section-intro reveal">HiMu provides a fully interpretable trace of its selection decisions. Each frame's relevance can be traced back through the logic tree to individual expert scores, revealing <em>why</em> specific frames were selected and <em>which</em> modality contributed most.</p>
+
+        <figure class="figure-card figure-card--wide reveal">
+            <img src="assets/himu_interpretability_web.jpg"
+                 data-full="assets/himu_interpretability_updated_sec.png"
+                 alt="Interpretability heatmap showing per-expert scores across video frames with the hierarchical logic tree structure"
+                 loading="lazy"
+                 class="lightbox-trigger"
+                 title="Click to zoom">
+            <figcaption>Interpretability visualization for the question "What does the black dog do in the water?" Each row shows a different expert's per-frame scores through the logic tree. The selected frames (bottom) correspond to peaks in the composed satisfaction curve. Click to zoom.</figcaption>
+        </figure>
+    </div>
+</section>
+
+<!-- Citation -->
+<section class="section section--dark" id="citation">
+    <div class="container container--narrow">
+        <h2 class="section-title reveal">Citation</h2>
+        <div class="bibtex-block reveal">
+            <button class="copy-btn" id="copyBibtex" title="Copy to clipboard">
+                <span class="copy-text">Copy</span>
+                <span class="copy-check" style="display:none;">Copied!</span>
+            </button>
+            <pre><code id="bibtexCode">@inproceedings{benami2026himu,
+  title     = {HiMu: Hierarchical Multimodal Frame Selection
+               for Long Video Question Answering},
+  author    = {Ben-Ami, Dan and Serussi, Gabriele and
+               Cohen, Kobi and Baskin, Chaim},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  year      = {2026}
+}</code></pre>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <p>HiMu &mdash; INSIGHT Lab, Ben-Gurion University of the Negev &mdash; 2026</p>
+    </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <div class="lightbox-content">
+        <img src="" alt="" id="lightboxImg">
+    </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
