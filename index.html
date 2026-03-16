@@ -201,7 +201,8 @@
             <div class="table-tabs">
                 <button class="tab-btn active" data-tab="controlled">Controlled Comparison</button>
                 <button class="tab-btn" data-tab="generalization">Cross-LVLM Generalization</button>
-                <button class="tab-btn" data-tab="ablation">Expert &amp; Frame Budget</button>
+                <button class="tab-btn" data-tab="ablation">Expert Ablation</button>
+                <button class="tab-btn" data-tab="framebudget">Frame Budget</button>
                 <button class="tab-btn" data-tab="sensitivity">Sensitivity Analysis</button>
                 <button class="tab-btn" data-tab="latency">Latency Breakdown</button>
             </div>
@@ -467,158 +468,159 @@
                 <p class="table-caption">HiMu generalizes across 6 LVLMs without model-specific tuning. All methods use K=16 frames unless noted. <span class="gray-text">Gray entries</span> denote results reported by respective authors under different frame budgets. *Evaluated on a stratified random 25% subset.</p>
             </div>
 
-            <!-- Tab 3: Expert & Frame Budget Ablation -->
+            <!-- Tab 3: Expert Ablation -->
             <div class="table-panel" data-panel="ablation" style="display: none;">
-                <div class="ablation-grid">
-                    <div class="table-wrapper">
-                        <h4 class="table-subtitle">Expert Ablation (K=16)</h4>
-                        <table class="results-table">
-                            <thead>
-                                <tr>
-                                    <th>Configuration</th>
-                                    <th>Short</th>
-                                    <th>Med.</th>
-                                    <th>Long</th>
-                                    <th>Overall</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="highlight-row">
-                                    <td><strong>HiMu</strong></td>
-                                    <td><strong>78.55</strong></td>
-                                    <td><strong>71.00</strong></td>
-                                    <td><strong>69.90</strong></td>
-                                    <td><strong>73.22</strong></td>
-                                </tr>
-                                <tr class="table-divider"><td colspan="5"></td></tr>
-                                <tr>
-                                    <td>Flat Fusion</td>
-                                    <td>68.65</td>
-                                    <td>66.06</td>
-                                    <td>68.45</td>
-                                    <td>67.73</td>
-                                </tr>
-                                <tr class="table-divider"><td colspan="5"></td></tr>
-                                <tr>
-                                    <td>w/o ASR</td>
-                                    <td>76.34</td>
-                                    <td>69.07</td>
-                                    <td>68.08</td>
-                                    <td>71.23</td>
-                                </tr>
-                                <tr>
-                                    <td>w/o CLAP</td>
-                                    <td>77.97</td>
-                                    <td>69.43</td>
-                                    <td>69.05</td>
-                                    <td>72.22</td>
-                                </tr>
-                                <tr>
-                                    <td>w/o CLIP</td>
-                                    <td>76.46</td>
-                                    <td>69.55</td>
-                                    <td>69.17</td>
-                                    <td>71.79</td>
-                                </tr>
-                                <tr>
-                                    <td>w/o OCR</td>
-                                    <td>77.39</td>
-                                    <td>69.92</td>
-                                    <td>69.05</td>
-                                    <td>72.18</td>
-                                </tr>
-                                <tr>
-                                    <td>w/o OVD</td>
-                                    <td>77.39</td>
-                                    <td>70.64</td>
-                                    <td>69.17</td>
-                                    <td>72.46</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="table-wrapper">
-                        <h4 class="table-subtitle">Frame Budget</h4>
-                        <table class="results-table">
-                            <thead>
-                                <tr>
-                                    <th># Frames</th>
-                                    <th>Method</th>
-                                    <th>Short</th>
-                                    <th>Med.</th>
-                                    <th>Long</th>
-                                    <th>Overall</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td rowspan="2">8</td>
-                                    <td>Uniform</td>
-                                    <td><strong>73.54</strong></td>
-                                    <td>63.42</td>
-                                    <td>54.67</td>
-                                    <td>64.00</td>
-                                </tr>
-                                <tr class="highlight-row">
-                                    <td><strong>HiMu</strong></td>
-                                    <td><strong>73.54</strong></td>
-                                    <td><strong>68.71</strong></td>
-                                    <td><strong>68.81</strong></td>
-                                    <td><strong>70.39</strong></td>
-                                </tr>
-                                <tr class="table-divider"><td colspan="6"></td></tr>
-                                <tr>
-                                    <td rowspan="2">16</td>
-                                    <td>Uniform</td>
-                                    <td>76.34</td>
-                                    <td>66.31</td>
-                                    <td>55.58</td>
-                                    <td>66.36</td>
-                                </tr>
-                                <tr class="highlight-row">
-                                    <td><strong>HiMu</strong></td>
-                                    <td><strong>78.55</strong></td>
-                                    <td><strong>71.00</strong></td>
-                                    <td><strong>69.90</strong></td>
-                                    <td><strong>73.22</strong></td>
-                                </tr>
-                                <tr class="table-divider"><td colspan="6"></td></tr>
-                                <tr>
-                                    <td rowspan="2">32</td>
-                                    <td>Uniform</td>
-                                    <td><strong>81.35</strong></td>
-                                    <td>69.19</td>
-                                    <td>58.67</td>
-                                    <td>69.89</td>
-                                </tr>
-                                <tr class="highlight-row">
-                                    <td><strong>HiMu</strong></td>
-                                    <td>80.77</td>
-                                    <td><strong>73.29</strong></td>
-                                    <td><strong>70.02</strong></td>
-                                    <td><strong>74.77</strong></td>
-                                </tr>
-                                <tr class="table-divider"><td colspan="6"></td></tr>
-                                <tr>
-                                    <td rowspan="2">64</td>
-                                    <td>Uniform</td>
-                                    <td><strong>82.87</strong></td>
-                                    <td>71.12</td>
-                                    <td>60.61</td>
-                                    <td>71.68</td>
-                                </tr>
-                                <tr class="highlight-row">
-                                    <td><strong>HiMu</strong></td>
-                                    <td>82.40</td>
-                                    <td><strong>73.53</strong></td>
-                                    <td><strong>71.12</strong></td>
-                                    <td><strong>75.77</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="table-wrapper">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Configuration</th>
+                                <th>Short</th>
+                                <th>Med.</th>
+                                <th>Long</th>
+                                <th>Overall</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu</strong></td>
+                                <td><strong>78.55</strong></td>
+                                <td><strong>71.00</strong></td>
+                                <td><strong>69.90</strong></td>
+                                <td><strong>73.22</strong></td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="5"></td></tr>
+                            <tr>
+                                <td>Flat Fusion</td>
+                                <td>68.65</td>
+                                <td>66.06</td>
+                                <td>68.45</td>
+                                <td>67.73</td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="5"></td></tr>
+                            <tr>
+                                <td>w/o ASR</td>
+                                <td>76.34</td>
+                                <td>69.07</td>
+                                <td>68.08</td>
+                                <td>71.23</td>
+                            </tr>
+                            <tr>
+                                <td>w/o CLAP</td>
+                                <td>77.97</td>
+                                <td>69.43</td>
+                                <td>69.05</td>
+                                <td>72.22</td>
+                            </tr>
+                            <tr>
+                                <td>w/o CLIP</td>
+                                <td>76.46</td>
+                                <td>69.55</td>
+                                <td>69.17</td>
+                                <td>71.79</td>
+                            </tr>
+                            <tr>
+                                <td>w/o OCR</td>
+                                <td>77.39</td>
+                                <td>69.92</td>
+                                <td>69.05</td>
+                                <td>72.18</td>
+                            </tr>
+                            <tr>
+                                <td>w/o OVD</td>
+                                <td>77.39</td>
+                                <td>70.64</td>
+                                <td>69.17</td>
+                                <td>72.46</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <p class="table-caption">Ablation studies on Video-MME using Qwen3-VL-8B. &ldquo;Flat Fusion&rdquo; replaces the logic tree with a flat summation of all leaf scores. HiMu at K=16 rivals Uniform at K=64.</p>
+                <p class="table-caption">Expert ablation on Video-MME (K=16, Qwen3-VL-8B). &ldquo;Flat Fusion&rdquo; replaces the logic tree with a flat summation of all leaf scores; each &ldquo;w/o&rdquo; row removes one expert.</p>
+            </div>
+
+            <!-- Tab 4: Frame Budget -->
+            <div class="table-panel" data-panel="framebudget" style="display: none;">
+                <div class="table-wrapper">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th># Frames</th>
+                                <th>Method</th>
+                                <th>Short</th>
+                                <th>Med.</th>
+                                <th>Long</th>
+                                <th>Overall</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2">8</td>
+                                <td>Uniform</td>
+                                <td><strong>73.54</strong></td>
+                                <td>63.42</td>
+                                <td>54.67</td>
+                                <td>64.00</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu</strong></td>
+                                <td><strong>73.54</strong></td>
+                                <td><strong>68.71</strong></td>
+                                <td><strong>68.81</strong></td>
+                                <td><strong>70.39</strong></td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="6"></td></tr>
+                            <tr>
+                                <td rowspan="2">16</td>
+                                <td>Uniform</td>
+                                <td>76.34</td>
+                                <td>66.31</td>
+                                <td>55.58</td>
+                                <td>66.36</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu</strong></td>
+                                <td><strong>78.55</strong></td>
+                                <td><strong>71.00</strong></td>
+                                <td><strong>69.90</strong></td>
+                                <td><strong>73.22</strong></td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="6"></td></tr>
+                            <tr>
+                                <td rowspan="2">32</td>
+                                <td>Uniform</td>
+                                <td><strong>81.35</strong></td>
+                                <td>69.19</td>
+                                <td>58.67</td>
+                                <td>69.89</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu</strong></td>
+                                <td>80.77</td>
+                                <td><strong>73.29</strong></td>
+                                <td><strong>70.02</strong></td>
+                                <td><strong>74.77</strong></td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="6"></td></tr>
+                            <tr>
+                                <td rowspan="2">64</td>
+                                <td>Uniform</td>
+                                <td><strong>82.87</strong></td>
+                                <td>71.12</td>
+                                <td>60.61</td>
+                                <td>71.68</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu</strong></td>
+                                <td>82.40</td>
+                                <td><strong>73.53</strong></td>
+                                <td><strong>71.12</strong></td>
+                                <td><strong>75.77</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="table-caption">Effect of frame budget K on Video-MME (Qwen3-VL-8B). HiMu at K=16 rivals Uniform at K=64.</p>
             </div>
 
             <!-- Tab 4: Sensitivity Analysis -->
