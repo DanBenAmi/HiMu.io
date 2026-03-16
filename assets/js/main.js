@@ -74,7 +74,7 @@ function initNavHighlight() {
 /* ---- Results Table Tabs ---- */
 function initTableTabs() {
     const tabs = document.querySelectorAll('.tab-btn');
-    const groups = document.querySelectorAll('.table-group');
+    const panels = document.querySelectorAll('.table-panel');
 
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -83,8 +83,8 @@ function initTableTabs() {
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
 
-            groups.forEach(group => {
-                group.style.display = group.dataset.group === target ? '' : 'none';
+            panels.forEach(panel => {
+                panel.style.display = panel.dataset.panel === target ? '' : 'none';
             });
         });
     });

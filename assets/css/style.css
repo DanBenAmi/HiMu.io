@@ -471,7 +471,7 @@ a {
 /* ---- Method Section ---- */
 .pipeline-figure {
     margin: 2rem auto 3rem;
-    background: #1a1a1a;
+    background: #ffffff;
     border-radius: var(--radius);
     padding: 1.5rem;
     box-shadow: var(--shadow);
@@ -589,6 +589,7 @@ a {
     justify-content: center;
     gap: 0.5rem;
     margin-bottom: 1.5rem;
+    flex-wrap: wrap;
 }
 
 .tab-btn {
@@ -684,6 +685,42 @@ a {
 
 .gray-text {
     color: var(--color-text-muted);
+}
+
+/* Side-by-side ablation tables */
+.ablation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .ablation-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Sub-table titles within panels */
+.table-subtitle {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+}
+
+/* Spacing between stacked table wrappers */
+.table-panel .table-wrapper + .table-wrapper {
+    margin-top: 1.5rem;
+}
+
+/* Section header rows (e.g. latency breakdown groups) */
+.results-table .section-header-row td {
+    font-weight: 600;
+    font-style: italic;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .results-highlight {

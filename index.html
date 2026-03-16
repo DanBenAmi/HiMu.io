@@ -196,207 +196,670 @@
             </figure>
         </div>
 
-        <!-- Results Table -->
+        <!-- Results Tables -->
         <div class="results-table-section reveal">
             <div class="table-tabs">
                 <button class="tab-btn active" data-tab="controlled">Controlled Comparison</button>
                 <button class="tab-btn" data-tab="generalization">Cross-LVLM Generalization</button>
+                <button class="tab-btn" data-tab="ablation">Expert &amp; Frame Budget</button>
+                <button class="tab-btn" data-tab="sensitivity">Sensitivity Analysis</button>
+                <button class="tab-btn" data-tab="latency">Latency Breakdown</button>
             </div>
 
-            <div class="table-wrapper">
-                <table class="results-table">
-                    <thead>
-                        <tr>
-                            <th>Method</th>
-                            <th>Model</th>
-                            <th>Short</th>
-                            <th>Med.</th>
-                            <th>Long</th>
-                            <th>Overall</th>
-                            <th>LVB<sub>val</sub></th>
-                            <th>HERBench-Lite</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group" data-group="controlled">
-                        <tr>
-                            <td>Uniform Sampling</td>
-                            <td>Qwen3-VL-8B</td>
-                            <td>76.34</td>
-                            <td>66.31</td>
-                            <td>55.58</td>
-                            <td>66.36</td>
-                            <td>55.74</td>
-                            <td>41.70</td>
-                        </tr>
-                        <tr>
-                            <td>BOLT</td>
-                            <td>Qwen3-VL-8B</td>
-                            <td>69.58</td>
-                            <td>67.87</td>
-                            <td>68.73</td>
-                            <td>68.74</td>
-                            <td>54.55</td>
-                            <td>42.20</td>
-                        </tr>
-                        <tr>
-                            <td>T*</td>
-                            <td>Qwen3-VL-8B</td>
-                            <td>73.66</td>
-                            <td>67.39</td>
-                            <td>68.12</td>
-                            <td>69.77</td>
-                            <td>57.49</td>
-                            <td>39.10</td>
-                        </tr>
-                        <tr>
-                            <td>AKS</td>
-                            <td>Qwen3-VL-8B</td>
-                            <td>70.05</td>
-                            <td>65.10</td>
-                            <td>68.73</td>
-                            <td>67.98</td>
-                            <td>57.14</td>
-                            <td>40.25</td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td><strong>HiMu (Ours)</strong></td>
-                            <td>Qwen3-VL-8B</td>
-                            <td><strong>78.55</strong></td>
-                            <td><strong>71.00</strong></td>
-                            <td><strong>69.90</strong></td>
-                            <td><strong>73.22</strong></td>
-                            <td><strong>64.19</strong></td>
-                            <td><strong>43.22</strong></td>
-                        </tr>
-                    </tbody>
-                    <tbody class="table-group" data-group="generalization" style="display: none;">
-                        <tr>
-                            <td>Uniform</td>
-                            <td>LLaVA-OV-1.5-8B</td>
-                            <td>72.26</td>
-                            <td>62.33</td>
-                            <td>54.85</td>
-                            <td>63.55</td>
-                            <td>54.33</td>
-                            <td>35.75</td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td><strong>HiMu (Ours)</strong></td>
-                            <td>LLaVA-OV-1.5-8B</td>
-                            <td>71.87</td>
-                            <td><strong>66.99</strong></td>
-                            <td><strong>63.94</strong></td>
-                            <td><strong>67.65</strong></td>
-                            <td><strong>57.85</strong></td>
-                            <td><strong>35.87</strong></td>
-                        </tr>
-                        <tr class="table-divider"><td colspan="8"></td></tr>
-                        <tr>
-                            <td>Uniform</td>
-                            <td>InternVL-3.5-8B</td>
-                            <td>75.41</td>
-                            <td>67.39</td>
-                            <td>56.55</td>
-                            <td>66.63</td>
-                            <td>59.23</td>
-                            <td>38.30</td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td><strong>HiMu (Ours)</strong></td>
-                            <td>InternVL-3.5-8B</td>
-                            <td><strong>76.92</strong></td>
-                            <td><strong>70.40</strong></td>
-                            <td><strong>66.50</strong></td>
-                            <td><strong>71.35</strong></td>
-                            <td><strong>64.11</strong></td>
-                            <td><strong>38.32</strong></td>
-                        </tr>
-                        <tr class="table-divider"><td colspan="8"></td></tr>
-                        <tr>
-                            <td>Uniform</td>
-                            <td>Qwen2.5-VL-7B</td>
-                            <td>72.49</td>
-                            <td>61.01</td>
-                            <td>53.82</td>
-                            <td>62.57</td>
-                            <td>54.58</td>
-                            <td>34.05</td>
-                        </tr>
-                        <tr class="gray-row">
-                            <td>VideoZoomer (128f)</td>
-                            <td>Qwen2.5-VL-7B</td>
-                            <td>&ndash;</td>
-                            <td>&ndash;</td>
-                            <td>55.8</td>
-                            <td>65.2</td>
-                            <td>57.7</td>
-                            <td>&ndash;</td>
-                        </tr>
-                        <tr class="gray-row">
-                            <td>VideoChat-A1 (512f)</td>
-                            <td>Qwen2.5-VL-7B</td>
-                            <td>&ndash;</td>
-                            <td>&ndash;</td>
-                            <td>&ndash;</td>
-                            <td>69.7</td>
-                            <td>55.6</td>
-                            <td>&ndash;</td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td><strong>HiMu (Ours)</strong></td>
-                            <td>Qwen2.5-VL-7B</td>
-                            <td><strong>73.08</strong></td>
-                            <td><strong>65.10</strong></td>
-                            <td><strong>62.86</strong></td>
-                            <td><strong>67.09</strong></td>
-                            <td><strong>57.51</strong></td>
-                            <td><strong>35.17</strong></td>
-                        </tr>
-                        <tr class="table-divider"><td colspan="8"></td></tr>
-                        <tr>
-                            <td>Uniform</td>
-                            <td>GPT-4o</td>
-                            <td>76.96</td>
-                            <td>73.03</td>
-                            <td>71.43</td>
-                            <td>73.81</td>
-                            <td>55.58</td>
-                            <td>37.47</td>
-                        </tr>
-                        <tr class="gray-row">
-                            <td>VSLS (32f)</td>
-                            <td>GPT-4o</td>
-                            <td>71.9</td>
-                            <td>61.9</td>
-                            <td>55.2</td>
-                            <td>63.0</td>
-                            <td>63.4</td>
-                            <td>&ndash;</td>
-                        </tr>
-                        <tr class="gray-row">
-                            <td>VideoChat-A1 (384f)</td>
-                            <td>&ndash;</td>
-                            <td>&ndash;</td>
-                            <td>&ndash;</td>
-                            <td>&ndash;</td>
-                            <td>77.2</td>
-                            <td>66.7</td>
-                            <td>&ndash;</td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td><strong>HiMu (Ours)</strong></td>
-                            <td>GPT-4o</td>
-                            <td><strong>80.88</strong></td>
-                            <td><strong>77.19</strong></td>
-                            <td><strong>76.53</strong></td>
-                            <td><strong>78.18</strong></td>
-                            <td><strong>65.10</strong></td>
-                            <td><strong>40.68</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Tab 1: Controlled Comparison -->
+            <div class="table-panel" data-panel="controlled">
+                <div class="table-wrapper">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Model</th>
+                                <th>Short</th>
+                                <th>Med.</th>
+                                <th>Long</th>
+                                <th>Overall</th>
+                                <th>LVB<sub>val</sub></th>
+                                <th>HERBench-Lite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Uniform Sampling</td>
+                                <td>Qwen3-VL-8B</td>
+                                <td>76.34</td>
+                                <td>66.31</td>
+                                <td>55.58</td>
+                                <td>66.36</td>
+                                <td>55.74</td>
+                                <td>41.70</td>
+                            </tr>
+                            <tr>
+                                <td>BOLT</td>
+                                <td>Qwen3-VL-8B</td>
+                                <td>69.58</td>
+                                <td>67.87</td>
+                                <td>68.73</td>
+                                <td>68.74</td>
+                                <td>54.55</td>
+                                <td>42.20</td>
+                            </tr>
+                            <tr>
+                                <td>T*</td>
+                                <td>Qwen3-VL-8B</td>
+                                <td>73.66</td>
+                                <td>67.39</td>
+                                <td>68.12</td>
+                                <td>69.77</td>
+                                <td>57.49</td>
+                                <td>39.10</td>
+                            </tr>
+                            <tr>
+                                <td>AKS</td>
+                                <td>Qwen3-VL-8B</td>
+                                <td>70.05</td>
+                                <td>65.10</td>
+                                <td>68.73</td>
+                                <td>67.98</td>
+                                <td>57.14</td>
+                                <td>40.25</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu (Ours)</strong></td>
+                                <td>Qwen3-VL-8B</td>
+                                <td><strong>78.55</strong></td>
+                                <td><strong>71.00</strong></td>
+                                <td><strong>69.90</strong></td>
+                                <td><strong>73.22</strong></td>
+                                <td><strong>64.19</strong></td>
+                                <td><strong>43.22</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="table-caption">Comparison on Video-MME, LongVideoBench<sub>val</sub>, and HERBench-Lite. All methods use K=16 frames with Qwen3-VL-8B.</p>
             </div>
-            <p class="table-caption">Comparison on Video-MME, LongVideoBench<sub>val</sub>, and HERBench-Lite. All methods use K=16 frames unless noted. <span class="gray-text">Gray entries</span> denote results reported by respective authors under different frame budgets.</p>
+
+            <!-- Tab 2: Cross-LVLM Generalization -->
+            <div class="table-panel" data-panel="generalization" style="display: none;">
+                <div class="table-wrapper">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Model</th>
+                                <th>Short</th>
+                                <th>Med.</th>
+                                <th>Long</th>
+                                <th>Overall</th>
+                                <th>LVB<sub>val</sub></th>
+                                <th>HERBench-Lite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Uniform</td>
+                                <td>LLaVA-OV-1.5-8B</td>
+                                <td><strong>72.26</strong></td>
+                                <td>62.33</td>
+                                <td>54.85</td>
+                                <td>63.55</td>
+                                <td>54.33</td>
+                                <td>35.75</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu (Ours)</strong></td>
+                                <td>LLaVA-OV-1.5-8B</td>
+                                <td>71.87</td>
+                                <td><strong>66.99</strong></td>
+                                <td><strong>63.94</strong></td>
+                                <td><strong>67.65</strong></td>
+                                <td><strong>57.85</strong></td>
+                                <td><strong>35.87</strong></td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="8"></td></tr>
+                            <tr>
+                                <td>Uniform</td>
+                                <td>InternVL-3.5-8B</td>
+                                <td>75.41</td>
+                                <td>67.39</td>
+                                <td>56.55</td>
+                                <td>66.63</td>
+                                <td>59.23</td>
+                                <td>38.30</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu (Ours)</strong></td>
+                                <td>InternVL-3.5-8B</td>
+                                <td><strong>76.92</strong></td>
+                                <td><strong>70.40</strong></td>
+                                <td><strong>66.50</strong></td>
+                                <td><strong>71.35</strong></td>
+                                <td><strong>64.11</strong></td>
+                                <td><strong>38.32</strong></td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="8"></td></tr>
+                            <tr>
+                                <td>Uniform</td>
+                                <td>Qwen2.5-VL-7B</td>
+                                <td>72.49</td>
+                                <td>61.01</td>
+                                <td>53.82</td>
+                                <td>62.57</td>
+                                <td>54.58</td>
+                                <td>34.05</td>
+                            </tr>
+                            <tr class="gray-row">
+                                <td>VideoZoomer (128f)</td>
+                                <td>Qwen2.5-VL-7B</td>
+                                <td>&ndash;</td>
+                                <td>&ndash;</td>
+                                <td>55.8</td>
+                                <td>65.2</td>
+                                <td>57.7</td>
+                                <td>&ndash;</td>
+                            </tr>
+                            <tr class="gray-row">
+                                <td>VideoChat-A1 (512f)</td>
+                                <td>Qwen2.5-VL-7B</td>
+                                <td>&ndash;</td>
+                                <td>&ndash;</td>
+                                <td>&ndash;</td>
+                                <td>69.7</td>
+                                <td>55.6</td>
+                                <td>&ndash;</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu (Ours)</strong></td>
+                                <td>Qwen2.5-VL-7B</td>
+                                <td><strong>73.08</strong></td>
+                                <td><strong>65.10</strong></td>
+                                <td><strong>62.86</strong></td>
+                                <td><strong>67.09</strong></td>
+                                <td><strong>57.51</strong></td>
+                                <td><strong>35.17</strong></td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="8"></td></tr>
+                            <tr>
+                                <td>Uniform</td>
+                                <td>Gemma-3-12B</td>
+                                <td><strong>73.31</strong></td>
+                                <td>60.29</td>
+                                <td>55.83</td>
+                                <td>62.99</td>
+                                <td>47.59</td>
+                                <td>31.20</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu (Ours)</strong></td>
+                                <td>Gemma-3-12B</td>
+                                <td>71.56</td>
+                                <td><strong>65.70</strong></td>
+                                <td><strong>67.48</strong></td>
+                                <td><strong>68.28</strong></td>
+                                <td><strong>53.92</strong></td>
+                                <td><strong>31.47</strong></td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="8"></td></tr>
+                            <tr>
+                                <td>Uniform</td>
+                                <td>Gemini-2.5-Flash*</td>
+                                <td>78.43</td>
+                                <td>67.11</td>
+                                <td>61.22</td>
+                                <td>68.95</td>
+                                <td>56.33</td>
+                                <td>37.27</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu (Ours)</strong></td>
+                                <td>Gemini-2.5-Flash*</td>
+                                <td><strong>78.92</strong></td>
+                                <td><strong>75.00</strong></td>
+                                <td><strong>74.49</strong></td>
+                                <td><strong>76.11</strong></td>
+                                <td><strong>70.13</strong></td>
+                                <td><strong>37.68</strong></td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="8"></td></tr>
+                            <tr>
+                                <td>Uniform</td>
+                                <td>GPT-4o*</td>
+                                <td>76.96</td>
+                                <td>73.03</td>
+                                <td>71.43</td>
+                                <td>73.81</td>
+                                <td>55.58</td>
+                                <td>37.47</td>
+                            </tr>
+                            <tr class="gray-row">
+                                <td>VSLS (32f)</td>
+                                <td>GPT-4o</td>
+                                <td>71.9</td>
+                                <td>61.9</td>
+                                <td>55.2</td>
+                                <td>63.0</td>
+                                <td>63.4</td>
+                                <td>&ndash;</td>
+                            </tr>
+                            <tr class="gray-row">
+                                <td>VideoChat-A1 (384f)</td>
+                                <td>&ndash;</td>
+                                <td>&ndash;</td>
+                                <td>&ndash;</td>
+                                <td>&ndash;</td>
+                                <td>77.2</td>
+                                <td>66.7</td>
+                                <td>&ndash;</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu (Ours)</strong></td>
+                                <td>GPT-4o*</td>
+                                <td><strong>80.88</strong></td>
+                                <td><strong>77.19</strong></td>
+                                <td><strong>76.53</strong></td>
+                                <td><strong>78.18</strong></td>
+                                <td><strong>65.10</strong></td>
+                                <td><strong>40.68</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="table-caption">HiMu generalizes across 6 LVLMs without model-specific tuning. All methods use K=16 frames unless noted. <span class="gray-text">Gray entries</span> denote results reported by respective authors under different frame budgets. *Evaluated on a stratified random 25% subset.</p>
+            </div>
+
+            <!-- Tab 3: Expert & Frame Budget Ablation -->
+            <div class="table-panel" data-panel="ablation" style="display: none;">
+                <div class="ablation-grid">
+                    <div class="table-wrapper">
+                        <h4 class="table-subtitle">Expert Ablation (K=16)</h4>
+                        <table class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>Configuration</th>
+                                    <th>Short</th>
+                                    <th>Med.</th>
+                                    <th>Long</th>
+                                    <th>Overall</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="highlight-row">
+                                    <td><strong>HiMu</strong></td>
+                                    <td><strong>78.55</strong></td>
+                                    <td><strong>71.00</strong></td>
+                                    <td><strong>69.90</strong></td>
+                                    <td><strong>73.22</strong></td>
+                                </tr>
+                                <tr class="table-divider"><td colspan="5"></td></tr>
+                                <tr>
+                                    <td>Flat Fusion</td>
+                                    <td>68.65</td>
+                                    <td>66.06</td>
+                                    <td>68.45</td>
+                                    <td>67.73</td>
+                                </tr>
+                                <tr class="table-divider"><td colspan="5"></td></tr>
+                                <tr>
+                                    <td>w/o ASR</td>
+                                    <td>76.34</td>
+                                    <td>69.07</td>
+                                    <td>68.08</td>
+                                    <td>71.23</td>
+                                </tr>
+                                <tr>
+                                    <td>w/o CLAP</td>
+                                    <td>77.97</td>
+                                    <td>69.43</td>
+                                    <td>69.05</td>
+                                    <td>72.22</td>
+                                </tr>
+                                <tr>
+                                    <td>w/o CLIP</td>
+                                    <td>76.46</td>
+                                    <td>69.55</td>
+                                    <td>69.17</td>
+                                    <td>71.79</td>
+                                </tr>
+                                <tr>
+                                    <td>w/o OCR</td>
+                                    <td>77.39</td>
+                                    <td>69.92</td>
+                                    <td>69.05</td>
+                                    <td>72.18</td>
+                                </tr>
+                                <tr>
+                                    <td>w/o OVD</td>
+                                    <td>77.39</td>
+                                    <td>70.64</td>
+                                    <td>69.17</td>
+                                    <td>72.46</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-wrapper">
+                        <h4 class="table-subtitle">Frame Budget</h4>
+                        <table class="results-table">
+                            <thead>
+                                <tr>
+                                    <th># Frames</th>
+                                    <th>Method</th>
+                                    <th>Short</th>
+                                    <th>Med.</th>
+                                    <th>Long</th>
+                                    <th>Overall</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="2">8</td>
+                                    <td>Uniform</td>
+                                    <td><strong>73.54</strong></td>
+                                    <td>63.42</td>
+                                    <td>54.67</td>
+                                    <td>64.00</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td><strong>HiMu</strong></td>
+                                    <td><strong>73.54</strong></td>
+                                    <td><strong>68.71</strong></td>
+                                    <td><strong>68.81</strong></td>
+                                    <td><strong>70.39</strong></td>
+                                </tr>
+                                <tr class="table-divider"><td colspan="6"></td></tr>
+                                <tr>
+                                    <td rowspan="2">16</td>
+                                    <td>Uniform</td>
+                                    <td>76.34</td>
+                                    <td>66.31</td>
+                                    <td>55.58</td>
+                                    <td>66.36</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td><strong>HiMu</strong></td>
+                                    <td><strong>78.55</strong></td>
+                                    <td><strong>71.00</strong></td>
+                                    <td><strong>69.90</strong></td>
+                                    <td><strong>73.22</strong></td>
+                                </tr>
+                                <tr class="table-divider"><td colspan="6"></td></tr>
+                                <tr>
+                                    <td rowspan="2">32</td>
+                                    <td>Uniform</td>
+                                    <td><strong>81.35</strong></td>
+                                    <td>69.19</td>
+                                    <td>58.67</td>
+                                    <td>69.89</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td><strong>HiMu</strong></td>
+                                    <td>80.77</td>
+                                    <td><strong>73.29</strong></td>
+                                    <td><strong>70.02</strong></td>
+                                    <td><strong>74.77</strong></td>
+                                </tr>
+                                <tr class="table-divider"><td colspan="6"></td></tr>
+                                <tr>
+                                    <td rowspan="2">64</td>
+                                    <td>Uniform</td>
+                                    <td><strong>82.87</strong></td>
+                                    <td>71.12</td>
+                                    <td>60.61</td>
+                                    <td>71.68</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td><strong>HiMu</strong></td>
+                                    <td>82.40</td>
+                                    <td><strong>73.53</strong></td>
+                                    <td><strong>71.12</strong></td>
+                                    <td><strong>75.77</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="table-caption">Ablation studies on Video-MME using Qwen3-VL-8B. &ldquo;Flat Fusion&rdquo; replaces the logic tree with a flat summation of all leaf scores. HiMu at K=16 rivals Uniform at K=64.</p>
+            </div>
+
+            <!-- Tab 4: Sensitivity Analysis -->
+            <div class="table-panel" data-panel="sensitivity" style="display: none;">
+                <div class="table-wrapper">
+                    <h4 class="table-subtitle">Hyperparameter Sensitivity</h4>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Configuration</th>
+                                <th>Accuracy</th>
+                                <th>&Delta;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu (default)</strong></td>
+                                <td><strong>73.31</strong></td>
+                                <td>&mdash;</td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="3"></td></tr>
+                            <tr class="section-header-row"><td colspan="3">Smoothing bandwidths</td></tr>
+                            <tr>
+                                <td>All smoothing disabled</td>
+                                <td>73.23</td>
+                                <td>&minus;0.08</td>
+                            </tr>
+                            <tr>
+                                <td>Visual &sigma; (CLIP/OVD/OCR, default: 0.5) &rarr; 0</td>
+                                <td>73.23</td>
+                                <td>&minus;0.08</td>
+                            </tr>
+                            <tr>
+                                <td>Visual &sigma; (CLIP/OVD/OCR, default: 0.5) &rarr; 2</td>
+                                <td>72.27</td>
+                                <td>&minus;1.04</td>
+                            </tr>
+                            <tr>
+                                <td>Speech &sigma; (ASR, default: 1.5) &rarr; 0</td>
+                                <td>73.07</td>
+                                <td>&minus;0.24</td>
+                            </tr>
+                            <tr>
+                                <td>Speech &sigma; (ASR, default: 1.5) &rarr; 4</td>
+                                <td>72.51</td>
+                                <td>&minus;0.80</td>
+                            </tr>
+                            <tr class="section-header-row"><td colspan="3">Temporal decay &kappa; (default: 2.0)</td></tr>
+                            <tr>
+                                <td>&kappa; = 0.5</td>
+                                <td>72.83</td>
+                                <td>&minus;0.48</td>
+                            </tr>
+                            <tr>
+                                <td>&kappa; = 4.0</td>
+                                <td>72.67</td>
+                                <td>&minus;0.64</td>
+                            </tr>
+                            <tr class="section-header-row"><td colspan="3">Sigmoid sharpness &gamma; (default: 3.0)</td></tr>
+                            <tr>
+                                <td>&gamma; = 1.0</td>
+                                <td>73.07</td>
+                                <td>&minus;0.24</td>
+                            </tr>
+                            <tr>
+                                <td>&gamma; = 5.0</td>
+                                <td>72.99</td>
+                                <td>&minus;0.32</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-wrapper">
+                    <h4 class="table-subtitle">Expert Backbone Ablation</h4>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Configuration</th>
+                                <th>Accuracy</th>
+                                <th>&Delta;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight-row">
+                                <td><strong>HiMu (default)</strong></td>
+                                <td><strong>73.31</strong></td>
+                                <td>&mdash;</td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="3"></td></tr>
+                            <tr class="section-header-row"><td colspan="3">Expert backbone swap</td></tr>
+                            <tr>
+                                <td>CLIP-dfn &rarr; SigLIP2</td>
+                                <td>72.59</td>
+                                <td>&minus;0.72</td>
+                            </tr>
+                            <tr>
+                                <td>YOLO-World v2 &rarr; Grounding DINO</td>
+                                <td>73.71</td>
+                                <td>+0.40</td>
+                            </tr>
+                            <tr>
+                                <td>docTR &rarr; EasyOCR</td>
+                                <td>72.35</td>
+                                <td>&minus;0.96</td>
+                            </tr>
+                            <tr>
+                                <td>faster-whisper lv3-turbo &rarr; whisper-large</td>
+                                <td>72.67</td>
+                                <td>&minus;0.64</td>
+                            </tr>
+                            <tr>
+                                <td>LAION CLAP &rarr; CLAP music-speech</td>
+                                <td>72.75</td>
+                                <td>&minus;0.56</td>
+                            </tr>
+                            <tr class="section-header-row"><td colspan="3">Selection strategy</td></tr>
+                            <tr>
+                                <td>PASS &rarr; Vanilla top-K</td>
+                                <td>72.59</td>
+                                <td>&minus;0.72</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-wrapper">
+                    <h4 class="table-subtitle">LLM Tree Parser Comparison</h4>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Tree Parser LLM</th>
+                                <th>Accuracy</th>
+                                <th>&Delta;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight-row">
+                                <td>Qwen3-VL-8B (default)</td>
+                                <td>73.31</td>
+                                <td>&mdash;</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LLaVA-OV-1.5-8B</strong></td>
+                                <td><strong>74.17</strong></td>
+                                <td><strong>+0.86</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Gemini-2.5-Flash</td>
+                                <td>73.31</td>
+                                <td>0.00</td>
+                            </tr>
+                            <tr>
+                                <td>InternVL-3.5-8B</td>
+                                <td>73.22</td>
+                                <td>&minus;0.09</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="table-caption">All sensitivity experiments use Qwen3-VL-8B with K=16 on a random 50% subset of Video-MME. &Delta; is the difference from the baseline.</p>
+            </div>
+
+            <!-- Tab 5: Latency Breakdown -->
+            <div class="table-panel" data-panel="latency" style="display: none;">
+                <div class="table-wrapper">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Hardware</th>
+                                <th>Latency (s)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="section-header-row"><td colspan="3">Preprocessing (cacheable, one-time per video)</td></tr>
+                            <tr>
+                                <td>Video / audio I/O</td>
+                                <td>CPU</td>
+                                <td>1.3</td>
+                            </tr>
+                            <tr>
+                                <td>CLIP-dfn ViT-L/14 (600 frames)</td>
+                                <td>1 GPU</td>
+                                <td>2.1</td>
+                            </tr>
+                            <tr>
+                                <td>LAION CLAP (300 windows)</td>
+                                <td>1 GPU</td>
+                                <td>0.9</td>
+                            </tr>
+                            <tr>
+                                <td>docTR OCR (~300 frames)</td>
+                                <td>4 GPUs (DP)</td>
+                                <td>3.0</td>
+                            </tr>
+                            <tr>
+                                <td>faster-whisper lv3-turbo (10 min)</td>
+                                <td>3 GPUs</td>
+                                <td>2.8</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>Preprocessing total (parallel)</strong></td>
+                                <td></td>
+                                <td><strong>4.3</strong></td>
+                            </tr>
+                            <tr class="section-header-row"><td colspan="3">Per-query (amortized cost)</td></tr>
+                            <tr>
+                                <td>Query planning (8B parser)</td>
+                                <td>1 GPU, CPU</td>
+                                <td>6.7</td>
+                            </tr>
+                            <tr>
+                                <td>OVD / YOLOv8x-worldv2 (600 frames)</td>
+                                <td>6 GPUs (DP)</td>
+                                <td>2.1</td>
+                            </tr>
+                            <tr>
+                                <td>Per-query scoring (text matching)</td>
+                                <td>1 GPU</td>
+                                <td>&lt;0.2</td>
+                            </tr>
+                            <tr>
+                                <td>Composition + PASS</td>
+                                <td>CPU</td>
+                                <td>&lt;0.1</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>Per-query total</strong></td>
+                                <td></td>
+                                <td><strong>9.0</strong></td>
+                            </tr>
+                            <tr class="table-divider"><td colspan="3"></td></tr>
+                            <tr class="highlight-row">
+                                <td><strong>E2E total (preprocess + per-query)</strong></td>
+                                <td></td>
+                                <td><strong>13.3</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="table-caption">Per-component selector latency on 8&times;A100 (80 GB) for a 10-minute video at 1 FPS (600 candidate frames, K=16). Preprocessing is cached; per-query stages run for each new question. DP = data-parallel.</p>
+            </div>
         </div>
 
         <!-- Key Takeaway -->
