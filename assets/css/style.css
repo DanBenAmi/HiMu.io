@@ -148,11 +148,11 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
+    height: 74px;
 }
 
 .nav-logo {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 800;
     color: #fff;
     letter-spacing: -0.02em;
@@ -173,7 +173,7 @@ a {
 
 .nav-links a {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
     transition: color var(--transition);
     position: relative;
@@ -893,7 +893,7 @@ a {
     .nav-links {
         display: none;
         position: absolute;
-        top: 64px;
+        top: 74px;
         left: 0;
         right: 0;
         background: rgba(26, 16, 64, 0.98);
