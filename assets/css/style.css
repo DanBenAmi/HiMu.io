@@ -267,11 +267,9 @@ a {
 }
 
 .nav-institution-logo {
-    height: 80px;
-    width: auto;
+    height: 36px;
+    width: 36px;
     object-fit: contain;
-    margin-top: -10px;
-    margin-bottom: -10px;
 }
 
 .hero-title {
@@ -958,6 +956,7 @@ a {
     }
 
     .nav-institution-logo {
-        height: 50px;
+        height: 28px;
+        width: 28px;
     }
 }
