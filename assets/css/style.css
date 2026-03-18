@@ -131,6 +131,7 @@ a {
     right: 0;
     z-index: 1000;
     background: transparent;
+    overflow: visible;
     transition: background var(--transition), box-shadow var(--transition), backdrop-filter var(--transition);
 }
 
@@ -266,9 +267,11 @@ a {
 }
 
 .nav-institution-logo {
-    height: 40px;
+    height: 80px;
     width: auto;
     object-fit: contain;
+    margin-top: -10px;
+    margin-bottom: -10px;
 }
 
 .hero-title {
@@ -955,6 +958,6 @@ a {
     }
 
     .nav-institution-logo {
-        height: 28px;
+        height: 50px;
     }
 }
