@@ -267,9 +267,10 @@ a {
 }
 
 .nav-institution-logo {
-    height: 36px;
-    width: 36px;
+    height: 74px;
+    width: auto;
     object-fit: contain;
+    padding: 4px 0;
 }
 
 .hero-title {
@@ -956,7 +957,7 @@ a {
     }
 
     .nav-institution-logo {
-        height: 44px;
-        width: 44x;
+        height: 74px;
+        width: auto;
     }
 }
